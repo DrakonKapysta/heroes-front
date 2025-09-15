@@ -1,69 +1,111 @@
-# React + TypeScript + Vite
+## 🚀 Getting Started
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Prerequisites
 
-Currently, two official plugins are available:
+- **Node.js** (v18 or higher)
+- **npm** or **yarn**
+- **Backend API** server running on `http://localhost:5000`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Installation
 
-## Expanding the ESLint configuration
+1. **Clone the repository**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+   ```bash
+   git clone <repository-url>
+   cd front-end
+   ```
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. **Install dependencies**
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+   ```bash
+   npm install
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+3. **Start the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:5173`
+
+### Available Scripts
+
+```bash
+# Start development server with HMR
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+
+# Run ESLint
+npm run lint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📁 Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+├── components/          # Reusable UI components
+│   ├── Auth/           # Authentication components
+│   │   ├── auth.tsx    # Auth context and hooks
+│   │   ├── LoginForm.tsx
+│   │   ├── RegisterForm.tsx
+│   │   └── Profile.tsx
+│   ├── Hero/           # Hero-related components
+│   │   ├── HeroCard.tsx
+│   │   ├── HeroList.tsx
+│   │   ├── HeroFilter.tsx
+│   │   ├── FullHeroInfo.tsx
+│   │   └── SuperheroForm.tsx
+│   ├── ui/             # shadcn/ui components
+│   ├── Modal.tsx       # Modal component
+│   └── Navbar.tsx      # Navigation component
+├── hooks/              # Custom React hooks
+│   ├── useDebounce.ts  # Debounce hook
+│   └── useMediaQuery.ts # Media query hook
+├── lib/                # Utility functions
+│   └── utils.ts        # Tailwind class merger
+├── routes/             # File-based routing
+│   ├── __root.tsx      # Root layout
+│   ├── index.tsx       # Home page
+│   ├── login.tsx       # Login page
+│   ├── register.tsx    # Registration page
+│   └── _protected/     # Protected routes
+│       ├── route.tsx   # Auth guard
+│       ├── create-hero.tsx
+│       └── update-hero/
+│           └── $heroId.tsx
+├── types.ts            # TypeScript definitions
+├── main.tsx            # App entry point
+└── index.css           # Global styles
+```
+
+## 🔐 Authentication System
+
+The app uses JWT-based authentication with the following features:
+
+- **Registration**: New user signup with email and password
+- **Login**: Secure authentication with persistent sessions
+- **Profile Management**: Update username and logout functionality
+- **Route Protection**: Automatic redirection for protected routes
+- **Context Provider**: Global auth state management
+
+## 🦸‍♀️ Hero Management
+
+### Superhero Features
+
+- **40+ Superpowers**: Comprehensive list including flight, super strength, telepathy, etc.
+- **Multiple Images**: Upload and manage multiple images per hero
+- **Rich Profiles**: Nickname, real name, origin story, catch phrase
+
+### Filtering & Search
+
+- **Text Search**: Search by nickname or real name with debouncing
+- **Superpower Filter**: Filter by any combination of superpowers
+- **Sorting Options**: Sort by nickname, real name, or creation date
+- **Pagination**: Configurable page sizes (5, 10, 15, 20, 50, 100)
