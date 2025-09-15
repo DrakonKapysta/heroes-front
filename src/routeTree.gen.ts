@@ -9,12 +9,25 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AboutRouteImport } from './routes/about'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as ProtectedRouteRouteImport } from './routes/_protected/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProtectedCreateHeroRouteImport } from './routes/_protected/create-hero'
+import { Route as ProtectedUpdateHeroHeroIdRouteImport } from './routes/_protected/update-hero/$heroId'
 
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProtectedRouteRoute = ProtectedRouteRouteImport.update({
+  id: '/_protected',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -22,40 +35,89 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProtectedCreateHeroRoute = ProtectedCreateHeroRouteImport.update({
+  id: '/create-hero',
+  path: '/create-hero',
+  getParentRoute: () => ProtectedRouteRoute,
+} as any)
+const ProtectedUpdateHeroHeroIdRoute =
+  ProtectedUpdateHeroHeroIdRouteImport.update({
+    id: '/update-hero/$heroId',
+    path: '/update-hero/$heroId',
+    getParentRoute: () => ProtectedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/create-hero': typeof ProtectedCreateHeroRoute
+  '/update-hero/$heroId': typeof ProtectedUpdateHeroHeroIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/create-hero': typeof ProtectedCreateHeroRoute
+  '/update-hero/$heroId': typeof ProtectedUpdateHeroHeroIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/_protected': typeof ProtectedRouteRouteWithChildren
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/_protected/create-hero': typeof ProtectedCreateHeroRoute
+  '/_protected/update-hero/$heroId': typeof ProtectedUpdateHeroHeroIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/create-hero'
+    | '/update-hero/$heroId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to: '/' | '/login' | '/register' | '/create-hero' | '/update-hero/$heroId'
+  id:
+    | '__root__'
+    | '/'
+    | '/_protected'
+    | '/login'
+    | '/register'
+    | '/_protected/create-hero'
+    | '/_protected/update-hero/$heroId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+  ProtectedRouteRoute: typeof ProtectedRouteRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_protected': {
+      id: '/_protected'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof ProtectedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -65,12 +127,42 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_protected/create-hero': {
+      id: '/_protected/create-hero'
+      path: '/create-hero'
+      fullPath: '/create-hero'
+      preLoaderRoute: typeof ProtectedCreateHeroRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
+    '/_protected/update-hero/$heroId': {
+      id: '/_protected/update-hero/$heroId'
+      path: '/update-hero/$heroId'
+      fullPath: '/update-hero/$heroId'
+      preLoaderRoute: typeof ProtectedUpdateHeroHeroIdRouteImport
+      parentRoute: typeof ProtectedRouteRoute
+    }
   }
 }
 
+interface ProtectedRouteRouteChildren {
+  ProtectedCreateHeroRoute: typeof ProtectedCreateHeroRoute
+  ProtectedUpdateHeroHeroIdRoute: typeof ProtectedUpdateHeroHeroIdRoute
+}
+
+const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
+  ProtectedCreateHeroRoute: ProtectedCreateHeroRoute,
+  ProtectedUpdateHeroHeroIdRoute: ProtectedUpdateHeroHeroIdRoute,
+}
+
+const ProtectedRouteRouteWithChildren = ProtectedRouteRoute._addFileChildren(
+  ProtectedRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  ProtectedRouteRoute: ProtectedRouteRouteWithChildren,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

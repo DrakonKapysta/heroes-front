@@ -1,0 +1,116 @@
+export interface Hero {
+  id: string;
+  nickname: string;
+  real_name?: string;
+  origin_description?: string;
+  catch_phrase?: string;
+  superpowers: string[];
+  images: string[];
+}
+
+export const Superpower = {
+  FLIGHT: "flight",
+  SUPER_STRENGTH: "super_strength",
+  INVISIBILITY: "invisibility",
+  TELEPATHY: "telepathy",
+  TELEKINESIS: "telekinesis",
+  SUPER_SPEED: "super_speed",
+  X_RAY_VISION: "x_ray_vision",
+  HEAT_VISION: "heat_vision",
+  INVULNERABILITY: "invulnerability",
+  SHAPE_SHIFTING: "shape_shifting",
+  TIME_MANIPULATION: "time_manipulation",
+  ELEMENTAL_CONTROL: "elemental_control",
+  MIND_CONTROL: "mind_control",
+  HEALING: "healing",
+  ENHANCED_SENSES: "enhanced_senses",
+  ENERGY_PROJECTION: "energy_projection",
+  WALL_CRAWLING: "wall_crawling",
+  WEATHER_CONTROL: "weather_control",
+  MAGNETISM: "magnetism",
+  TECHNOPATHY: "technopathy",
+
+  COMBAT_SKILLS: "combat_skills",
+  LASSO_OF_TRUTH: "lasso_of_truth",
+  TIME_TRAVEL: "time_travel",
+  QUICK_HEALING: "quick_healing",
+  ENERGY_CONSTRUCTS: "energy_constructs",
+  FORCE_FIELDS: "force_fields",
+  UNDERWATER_BREATHING: "underwater_breathing",
+  MARINE_TELEPATHY: "marine_telepathy",
+  SPIDER_SENSE: "spider_sense",
+  ENHANCED_AGILITY: "enhanced_agility",
+  POWERED_ARMOR: "powered_armor",
+  ADVANCED_WEAPONS: "advanced_weapons",
+  ENHANCED_REFLEXES: "enhanced_reflexes",
+  VIBRANIUM_SUIT: "vibranium_suit",
+  MASTER_TACTICIAN: "master_tactician",
+  MAGIC: "magic",
+  TELEPORTATION: "teleportation",
+  ENERGY_BLASTS: "energy_blasts",
+  GODLY_STRENGTH: "godly_strength",
+  STORM_CONTROL: "storm_control",
+  IMMORTALITY: "immortality",
+  REGENERATION: "regeneration",
+  LIMITLESS_DURABILITY: "limitless_durability",
+  ARCHERY_MASTERY: "archery_mastery",
+  STEALTH: "stealth",
+} as const;
+
+export type Superpower = (typeof Superpower)[keyof typeof Superpower];
+
+export const SuperpowerLabels: Record<Superpower, string> = {
+  [Superpower.FLIGHT]: "Flight",
+  [Superpower.SUPER_STRENGTH]: "Super Strength",
+  [Superpower.INVISIBILITY]: "Invisibility",
+  [Superpower.TELEPATHY]: "Telepathy",
+  [Superpower.TELEKINESIS]: "Telekinesis",
+  [Superpower.SUPER_SPEED]: "Super Speed",
+  [Superpower.X_RAY_VISION]: "X-Ray Vision",
+  [Superpower.HEAT_VISION]: "Heat Vision",
+  [Superpower.INVULNERABILITY]: "Invulnerability",
+  [Superpower.SHAPE_SHIFTING]: "Shape Shifting",
+  [Superpower.TIME_MANIPULATION]: "Time Manipulation",
+  [Superpower.ELEMENTAL_CONTROL]: "Elemental Control",
+  [Superpower.MIND_CONTROL]: "Mind Control",
+  [Superpower.HEALING]: "Healing",
+  [Superpower.ENHANCED_SENSES]: "Enhanced Senses",
+  [Superpower.ENERGY_PROJECTION]: "Energy Projection",
+  [Superpower.WALL_CRAWLING]: "Wall Crawling",
+  [Superpower.WEATHER_CONTROL]: "Weather Control",
+  [Superpower.MAGNETISM]: "Magnetism",
+  [Superpower.TECHNOPATHY]: "Technopathy",
+
+  [Superpower.COMBAT_SKILLS]: "Combat Skills",
+  [Superpower.LASSO_OF_TRUTH]: "Lasso of Truth",
+  [Superpower.TIME_TRAVEL]: "Time Travel",
+  [Superpower.QUICK_HEALING]: "Quick Healing",
+  [Superpower.ENERGY_CONSTRUCTS]: "Energy Constructs",
+  [Superpower.FORCE_FIELDS]: "Force Fields",
+  [Superpower.UNDERWATER_BREATHING]: "Underwater Breathing",
+  [Superpower.MARINE_TELEPATHY]: "Marine Telepathy",
+  [Superpower.SPIDER_SENSE]: "Spider Sense",
+  [Superpower.ENHANCED_AGILITY]: "Enhanced Agility",
+  [Superpower.POWERED_ARMOR]: "Powered Armor",
+  [Superpower.ADVANCED_WEAPONS]: "Advanced Weapons",
+  [Superpower.ENHANCED_REFLEXES]: "Enhanced Reflexes",
+  [Superpower.VIBRANIUM_SUIT]: "Vibranium Suit",
+  [Superpower.MASTER_TACTICIAN]: "Master Tactician",
+  [Superpower.MAGIC]: "Magic",
+  [Superpower.TELEPORTATION]: "Teleportation",
+  [Superpower.ENERGY_BLASTS]: "Energy Blasts",
+  [Superpower.GODLY_STRENGTH]: "Godly Strength",
+  [Superpower.STORM_CONTROL]: "Storm Control",
+  [Superpower.IMMORTALITY]: "Immortality",
+  [Superpower.REGENERATION]: "Regeneration",
+  [Superpower.LIMITLESS_DURABILITY]: "Limitless Durability",
+  [Superpower.ARCHERY_MASTERY]: "Archery Mastery",
+  [Superpower.STEALTH]: "Stealth",
+};
+
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  roles?: string[];
+}
